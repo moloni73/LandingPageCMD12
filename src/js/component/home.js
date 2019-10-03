@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap";
+import PropTypes from "prop-types";
 
 let menu = [
 	{
@@ -39,14 +40,14 @@ let menuHome = [
 const NavBar = props => {
 	//I have to loop all the items and convert them into LIs
 
-	const itStar = props.itStar.map(item1 => (
-		<a className="navbar-brand" href={item1.url}>
+	const itStar = props.itStar.map((item1, index) => (
+		<a className="navbar-brand" href={item1.url} key={index}>
 			{item1.label}
 		</a>
 	));
 
-	const itHome = props.itHome.map(item2 => (
-		<li className="nav-item active">
+	const itHome = props.itHome.map((item2, index) => (
+		<li className="nav-item active" key={index}>
 			<a className="nav-link" href={item2.url}>
 				{item2.label}
 				<span className="sr-only">(current)</span>
@@ -54,8 +55,8 @@ const NavBar = props => {
 		</li>
 	));
 
-	const items = props.items.map(item => (
-		<li className="nav-item">
+	const items = props.items.map((item, index) => (
+		<li className="nav-item" key={index}>
 			<a className="nav-link" href={item.url}>
 				{item.label}
 			</a>
@@ -88,6 +89,13 @@ const NavBar = props => {
 	);
 };
 
+NavBar.propTypes = {
+	itStar: PropTypes.array,
+	itHome: PropTypes.array,
+	items: PropTypes.array
+	// 2) add here the new properties into the proptypes object
+};
+
 let menujumbo = [
 	{
 		labeld: "A Warm Welcome!",
@@ -100,8 +108,8 @@ let menujumbo = [
 ];
 
 const Jumbot = props => {
-	const itemsj = props.itemsj.map(itemj => (
-		<div className="container">
+	const itemsj = props.itemsj.map((itemj, index) => (
+		<div className="container" key={index}>
 			<h1 className="display-3">{itemj.labeld}</h1>
 			<p className="lead">{itemj.labelp}</p>
 			<a href={itemj.url} className="btn btn-primary btn-lg">
@@ -111,6 +119,10 @@ const Jumbot = props => {
 	));
 
 	return <header className="jumbotron my-4">{itemsj}</header>;
+};
+
+Jumbot.propTypes = {
+	itemsj: PropTypes.array
 };
 
 let menucard = [
@@ -125,8 +137,8 @@ let menucard = [
 	}
 ];
 const Cardt = props => {
-	const itemsc = props.itemsc.map(itemc => (
-		<div className="card h-100">
+	const itemsc = props.itemsc.map((itemc, index) => (
+		<div className="card h-100" key={index}>
 			<img className="card-img-top" src={itemc.urlc} alt="" />
 			<div className="card-body">
 				<h4 className="card-title">{itemc.labelt}</h4>
@@ -143,6 +155,10 @@ const Cardt = props => {
 	return <div className="col-lg-3 col-md-6 mb-4">{itemsc}</div>;
 };
 
+Cardt.propTypes = {
+	itemsc: PropTypes.array
+};
+
 let menufoot = [
 	{
 		labelt: "Copyright © Your Website 2019"
@@ -150,13 +166,17 @@ let menufoot = [
 ];
 
 const Footert = props => {
-	const itemsf = props.itemsf.map(itemf => (
-		<div className="container">
+	const itemsf = props.itemsf.map((itemf, index) => (
+		<div className="container" key={index}>
 			<p className="m-0 text-center text-white">{itemf.labelt}</p>
 		</div>
 	));
 
 	return <footer className="py-5 bg-dark">{itemsf}</footer>;
+};
+
+Footert.propTypes = {
+	itemsf: PropTypes.array
 };
 
 //create your first component
